@@ -4,6 +4,8 @@ from flask import Blueprint, request, render_template
 
 home_routes = Blueprint("home_routes", __name__)
 
+message = ("Hello there.")
+
 @home_routes.route("/")
 @home_routes.route("/home")
 def index():
@@ -23,4 +25,4 @@ def hello_world():
     # ... which will return None instead of throwing an error if key is not present
     # ... see also: https://www.w3schools.com/python/ref_dictionary_get.asp
     name = request.args.get("name") or "World"
-    return render_template("hello.html", message=message)
+    return render_template("hello.html", message= message)
