@@ -92,6 +92,7 @@ Follow the deployment instructions to deploy the app to a remote server and sche
 
 ## [License](/LICENSE.md)
 
+# Web App 
 
 # mac:
 FLASK_APP=web_app flask run

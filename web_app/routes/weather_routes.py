@@ -18,3 +18,26 @@ def weather_forecast_api():
         return jsonify(results)
     else:
         return jsonify({"message":"Invalid Geography. Please try again."}), 404
+
+
+@weather_routes.route("/weather/forecast", methods=["GET", "POST"])
+def weather_forecast():
+    print("WEATHER FORECAST...")
+
+    if request.method == "GET":
+        print("URL PARAMS:", dict(request.args))
+        request_data = dict(request.args)
+    elif request.method == "POST": # the form will send a POST
+        print("FORM DATA:", dict(request.form))
+        request_data = dict(request.form)
+
+    country_code = request_data.get("country_code") or "US"
+    zip_code = request_data.get("zip_code") or "20057"
+
+    results = get_hourly_forecasts(country_code=country_code, zip_code=zip_code)
+    if results:
+        #flash(f"Weather Forecast Generated Successfully!", "success")
+        return render_template("weather_forecast.html", country_code=country_code, zip_code=zip_code, results=results)
+    else:
+        #flash(f"Geography Error. Please try again!", "danger")
+        return redirect("/weather/form")
